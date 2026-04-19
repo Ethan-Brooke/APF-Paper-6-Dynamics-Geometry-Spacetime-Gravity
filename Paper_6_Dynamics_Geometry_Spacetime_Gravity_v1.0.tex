@@ -1,0 +1,578 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black]{hyperref}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{microtype}
+\setlength{\parskip}{0.65em}
+\setlength{\parindent}{0pt}
+
+\title{Paper 6 --- REPRESENTATIONS (Dynamics \& Geometry): Dynamics and Geometry as Optimal Admissible Reallocation}
+\author{E. Brooke}
+\date{}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+This paper derives dynamics and geometry as representational structures that emerge when
+ admissibility constraints permit smooth, locally additive bookkeeping. Equations of motion arise
+ only in restricted regimes; outside these regimes---at saturation, horizons, or
+ measurement---variational dynamics ceases to be meaningful, though admissibility accounting
+ remains well-defined. Geometry emerges by a parallel route: distance is minimal correlation cost,
+ curvature arises from capacity gradients, and Einstein’s equations appear as the unique closure
+ relation in four dimensions (Lovelock uniqueness).
+
+ This February 2026 release incorporates the complete $\Delta$_geo closure: all five geometric
+ prerequisites (A9.1--A9.5) are now derived from the axioms, with the metric tensor proved from
+ non-factorization (T7B), d = 4 spacetime dimensions derived from capacity budget (T8),
+ Lorentzian signature from A4 irreversibility, and the cosmological constant identified as global
+ capacity residual (T11). The gravity sector is no longer hypothetical---it is structurally closed.
+\end{abstract}
+
+\section*{Part I: Dynamics}
+
+
+
+\section{Introduction}
+
+
+
+\subsection{The Standard View}
+
+In conventional physics, dynamics and geometry are taken as primitive. Equations of motion are
+
+postulated; spacetime is assumed as an arena. The questions “why do physical laws take
+
+variational form?” or “why is gravity geometric?” are rarely asked.
+
+
+
+\subsection{The Constraint-First Inversion}
+
+This paper asks: Under what conditions do equations of motion exist at all? Under what conditions
+
+does geometric description become meaningful? What happens when those conditions fail? The
+
+central claim is that dynamics and geometry are regime-dependent representations of admissible
+
+correlation reallocation. They emerge when correlation capacity admits smooth redistribution,
+
+enforcement cost is locally additive, and saturation boundaries are not encountered.
+
+
+
+\section{Why Admissibility Does Not Determine Evolution}
+
+Admissibility determines what correlation structures are jointly enforceable. It specifies necessary
+
+conditions for physical meaningfulness. But it does not provide sufficient conditions for selection.
+
+Given an admissible state, there may be multiple admissible continuations. Admissibility alone
+
+does not pick one.
+
+
+
+\section{Regime R: When Dynamics Becomes Meaningful}
+
+Dynamics becomes meaningful when: (R1) Enforcement cost is a smooth function of correlation
+
+sets. (R2) Cost is locally additive over interfaces. (R3) Admissible paths form a connected space.
+
+(R4) No saturation is encountered along the path. When all four conditions hold, enforcement cost
+
+defines a smooth functional on the space of admissible paths, and variational principles emerge
+
+necessarily.
+
+
+
+\section{Extremal Paths and Euler-Lagrange Structure}
+
+\[In Regime R, the accumulated enforcement cost along a path defines an action functional: K = $\\int$ L\]
+
+dt, where L encodes the local enforcement cost density. Extremal paths---those minimizing total
+
+\[enforcement cost---satisfy the Euler-Lagrange equations: d/dt($\\partial$L/$\\partial$q) - $\\partial$L/$\\partial$q = 0. This is not\]
+
+postulated. It follows from the variational structure of smooth enforcement cost.
+
+
+
+Conservation laws follow by Noether’s theorem: symmetries of the cost functional generate
+
+conserved quantities. Energy conservation follows from time-translation invariance of enforcement
+
+cost. Momentum conservation follows from spatial translation invariance.
+
+
+
+\section{Where Dynamics Fails}
+
+Mode                  Cause                              Result
+
+
+
+\[Saturation            S_$\Gamma$ = C_$\Gamma$                          Loss of admissible variation\]
+
+
+
+Branching             Non-unique continuations           No single equation of motion
+
+
+
+Record locking        Irreversible commitment            Regime exit to constraint-dominated
+
+
+
+Horizons              Persistent saturation              Dynamical inaccessibility
+
+
+
+These are not failures of physical law. They mark the limits of variational encoding. The underlying
+
+admissibility structure continues to hold; only the dynamical representation exits its domain.
+
+
+
+\section*{Part II: Geometry}
+
+
+
+\section{Correlation Cost and Distance}
+
+
+
+\subsection{Definition of Distance}
+
+\textbf{Definition 6.1 (Correlation Distance). The distance between regions A and B is the minimal}
+
+irreducible correlation cost required to jointly enforce coordination between them: d(A, B) $\\equiv$
+
+inf_{$\Gamma$: A$\to$B} $\\int$ C d$\Gamma$, where C is the correlation cost density along path $\Gamma$.
+
+
+
+Correlation distance satisfies non-negativity, identity of indiscernibles, and the triangle inequality.
+
+These are forced by enforcement cost structure, not assumed.
+
+
+
+\subsection{Geodesics as Least-Cost Paths}
+
+Paths minimizing correlation cost define geodesics. Along such paths, relational structure is
+
+maintained with minimal capacity expenditure. Free motion is least-cost coordination. No force law
+
+is required.
+
+
+
+\section{The Metric Tensor from Non-Factorization (T7B)}
+
+The February 2026 release closes the metric derivation completely.
+
+
+
+\subsection{Non-Factorization Implies Geometric Response}
+
+\textbf{Theorem T7B [P_structural]. At shared (non-factorizing) interfaces, the external feasibility}
+
+functional is quadratic in displacement. By the polarization identity, a functional that is: (a)
+
+non-degenerate (A1: finite capacity implies no zero-cost directions), (b) continuous (Lipschitz
+
+from the finite-bounded cost condition), and (c) defined on tangent vectors at each point
+
+(from T_continuum smooth structure) is a metric tensor g_$\mu$$\nu$.
+
+
+
+This is a definition-level result: a non-degenerate symmetric bilinear form on the tangent space at
+
+each point IS a metric tensor. The framework does not need to postulate geometry---it computes it
+
+from quadratic cost at shared interfaces.
+
+
+
+\subsection{Lorentzian Signature (-,+,+,+)}
+
+A4 (irreversibility) implies a strict partial order on admissible configurations. By the
+
+Hawking-King-McCarthy theorem (1976), a strict partial order on events satisfying appropriate
+
+density conditions determines the conformal structure. Combined with Malament’s theorem (1977)
+
+\[and volume normalization ($\Omega$ = 1 by Radon-Nikodym uniqueness), this fixes the Lorentzian\]
+
+signature. The metric has exactly one timelike direction. [Imports: HKM 1976, Malament 1977]
+
+
+
+\section{Spacetime Dimension d = 4 (T8)}
+
+\textbf{Theorem T8 [P_structural]. d = 4 is the minimal admissible spacetime dimension. d $\leq$ 3 is}
+
+\[hard-excluded: d = 3 has zero propagating graviton degrees of freedom (no gravitational\]
+
+records, violating A4); d = 2, 3 lack knots for topological stability of bound states. d = 4:
+
+minimum dimension with propagating gravity (2 DOF) + knot stability + capacity efficiency
+
+
+
+\[(C_ext/C_int = 0.5). d $\geq$ 5 disfavored by A5 (genericity: extra graviton modes provide no\]
+
+admissibility benefit).
+
+
+
+\[The internal sector uses C_int = 12 (dim SU(3)$\times$SU(2)$\times$U(1)), leaving C_ext for geometric degrees\]
+
+\[of freedom. In d = 4, the graviton has 2 propagating DOF, which is the minimum for A4-compatible\]
+
+gravitational records.
+
+
+
+\section{Curvature from Capacity Gradients}
+
+Correlation capacity is generally non-uniform. Capacity gradients cause geodesic deviation: paths
+
+converge in low-capacity regions (bottlenecks) and diverge in high-capacity regions. Curvature is
+
+the geometric signature of correlation load---not a postulated feature of spacetime but a derived
+
+consequence of capacity distribution.
+
+
+
+The stiffness parameter G (Newton’s constant) sets the scale of geometric response to correlation
+
+load: (curvature change) $\sim$ G $\times$ (load change). G is not a coupling strength but the rate at which
+
+geometry bends under correlation burden. Structurally: $\kappa$ $\sim$ 1/C_* where C_* is the total geometric
+
+capacity (T10).
+
+
+
+\section{Einstein’s Equations from $\Delta$_geo Closure}
+
+
+
+\subsection{The Geometric Prerequisites}
+
+The February 2026 release closes the complete $\Delta$_geo gap: all five geometric prerequisites
+
+(A9.1--A9.5) are now derived from the axioms, not assumed:
+
+
+
+Prerequisite         Content                                       Status
+
+
+
+A9.1 Locality        Geometric response depends only on local data
+
+Derived (A1 + FBC)
+
+
+
+A9.2 Covariance      Response is coordinate-invariant              Derived (T7B)
+
+
+
+A9.3 Conservation Capacity cannot be created or destroyed          Derived (A1)
+
+
+
+A9.4 Second-order No higher-derivative instabilities               Derived (A4 + Ostrogradsky)
+
+
+
+A9.5 Propagation     Gravitational waves propagate                 Derived (A4: records require DOF)
+
+
+
+\subsection{Lovelock Uniqueness}
+
+\textbf{Theorem (Lovelock, 1971) [Import]. In d = 4, the only symmetric, divergence-free tensor}
+
+G_$\mu$$\nu$ that depends on the metric and its first and second derivatives (linearly in second
+
+derivatives) is the Einstein tensor plus cosmological term.
+
+
+
+A9.1--A9.5 are precisely Lovelock’s conditions. The unique field equation is:
+
+
+
+\[G_$\mu$$\nu$ + Λg_$\mu$$\nu$ = $\kappa$T_$\mu$$\nu$\]
+
+
+
+Einstein’s equations are not postulated. They are the unique admissibility-preserving geometric
+
+response in 4D. The equivalence principle follows: because correlation cost depends only on
+
+capacity distribution (not internal properties), all systems follow the same least-cost paths.
+
+
+
+Universality of free fall follows from universality of correlation constraints.
+
+
+
+\section{The Cosmological Constant as Capacity Residual (T11)}
+
+\textbf{Theorem T11 [P_structural]. Λ is the global capacity residual after all local enforcement}
+
+commitments: Λ $\sim$ (C_total - C_used) / V.
+
+
+
+\subsection{Why Λ Is Small}
+
+Almost all correlation capacity has been discharged locally: structure formation, matter, radiation,
+
+horizons, records. Only the asymptotic remainder survives. The remaining scale is set by the
+
+largest admissible interface---the cosmological horizon R_H---giving Λ $\sim$ 1/R_H² $\sim$ H_0². Not
+
+because of vacuum energy, but because R_H is the last interface where correlation enforcement
+
+still matters.
+
+
+
+\subsection{Why Λ Is Nonzero}
+
+\[Exact saturation (C_total = C_used) is a measure-zero condition. Any finite universe with finite\]
+
+total capacity generically has a small positive residual. The sign is positive because C_total >
+
+C_used: the universe has not yet fully committed its capacity budget.
+
+
+
+\subsection{Why Λ Looks Like Accelerated Expansion}
+
+Local mass-energy is redistributable: it creates curvature gradients and attraction. Global residual
+
+capacity is non-redistributable: it creates uniform pressure and expansion. Λ does not “push space
+
+apart”---it prevents further correlation contraction once global slack is exhausted. Acceleration is
+
+the failure mode of further geometric reorganization.
+
+
+
+\section{Dark Matter as Geometric Capacity}
+
+\[The capacity partition C_total = C_int + C_ext identifies a geometric sector C_ext that gravitates (it\]
+
+curves spacetime via T7B) but does not couple to gauge interactions (it has no internal structure).
+
+This is precisely the phenomenology of dark matter: gravitational effects without electromagnetic
+
+or strong-force interactions.
+
+
+
+Dark matter is not a particle species. It is the external geometric capacity---the C_ext portion of the
+
+total budget that supports spacetime structure but carries no gauge charges. Its distribution follows
+
+capacity gradients, explaining rotation curves and gravitational lensing without introducing new
+
+particles. Prediction: direct detection experiments should find no dark matter particles.
+
+
+
+\section{Where Geometry Fails}
+
+Geometry is valid when correlation cost is locally integrable, capacity gradients are smooth, and
+
+no interface is saturated. Geometry fails at singularities (capacity gradients diverge), horizons
+
+(interfaces persistently saturated), Planck scale (discrete structure dominates smooth
+
+approximation), and topology change (manifold structure inapplicable). These failures are not
+
+pathologies. They are predictions: here is where geometric description exits its domain.
+
+
+
+\section{Summary}
+
+
+
+\subsection{The Derivation Chain}
+
+\textbf{Result                        Source                                    Status}
+
+
+
+Variational dynamics          Smooth enforcement cost in Regime R       [P] (conditional on R)
+
+
+
+Euler-Lagrange equations      Extremal paths of cost functional         [P]
+
+
+
+Conservation laws             Noether + cost symmetries                 [P]
+
+
+
+Correlation distance          Minimal enforcement cost                  [P]
+
+
+
+Metric tensor g_$\mu$$\nu$            Non-factorization + polarization (T7B)    [P_structural]
+
+
+
+Lorentzian signature          A4 + HKM + Malament                       [P_str] + [I: HKM]
+
+
+
+\[d = 4 dimensions              Capacity budget + A4 (T8)                 [P_structural]\]
+
+
+
+Einstein equations            A9.1--9.5 + Lovelock (T9_grav)             [P_str] + [I: Lovelock]
+
+
+
+Equivalence principle         Universality of correlation cost          [P_structural]
+
+
+
+\[$\kappa$ $\sim$ 1/C_*                     Capacity scaling (T10)                    [P_str] (scaling only)\]
+
+
+
+Λ $\sim$ 1/R_H²                    Global capacity residual (T11)            [P_structural]
+
+
+
+\[Dark matter = C_ext           Geometric capacity partition              [P_structural]\]
+
+
+
+\subsection{The Structural Conclusion}
+
+Dynamics and geometry are not fundamental laws but effective representations---the unique
+
+bookkeeping structures available when finite enforceability permits smooth coordination. Together
+
+with Paper 5 (quantum structure), this recovers the full structure of fundamental physics from finite
+
+enforceability---not as postulates, but as the unique bookkeeping available when capacity
+
+constraints permit smooth description. The gravity sector is now structurally closed: metric,
+
+signature, dimension, field equations, cosmological constant, and dark sector all derive from the
+
+axioms.
+
+
+
+Appendix A: $\Delta$_geo Closure Summary
+
+The $\Delta$_geo gap encompassed four sub-gaps, all closed in the February 2026 release:
+
+
+
+Sub-gap              Content                             Resolution
+
+
+
+$\Delta$_ordering           Causal order from A4                A4 irreversibility ⇒ strict partial order. R2/R3 formalized.
+
+
+
+$\Delta$_fbc                Finite-bounded cost condition       Lipschitz lemma from A1 + $\\epsilon$-granularity.
+
+
+
+$\Delta$_continuum          Smooth manifold structure           Kolmogorov + chartability bridge. Imports Kolmogorov consistency.
+
+
+
+$\Delta$_signature          Lorentzian (-,+,+,+)                A4$\to$order + HKM + $\Omega$=1 (Radon-Nikodym uniqueness).
+
+
+
+Appendix B: Enforcement Cost vs. Action
+
+Entropy measures irreversibly committed capacity (accounting of commitment). Enforcement cost
+
+measures capacity required for transitions (cost of reallocation). They are related but distinct:
+
+entropy accumulates; enforcement cost is path-dependent. In Regime R, accumulated
+
+\[enforcement cost can be encoded as action: K = $\\int$ L dt. The identification with physical action is\]
+
+exact within the regime and breaks down at saturation. Paper 7 (ACTION) proves that this
+
+accumulated cost has a minimum: the structural origin of Planck’s constant.
+
+
+
+Appendix C: Changelog from January 2026 Release
+
+Change                           Section       Details
+
+
+
+$\Delta$_geo fully closed               10.1          All A9.1--9.5 derived. No geometric prerequisites remain assumed.
+
+
+
+T7B metric derivation            7.1           Non-factorization + polarization identity $\to$ metric. Gap CLOSED.
+
+
+
+Lorentzian signature             7.2           A4 $\to$ partial order + HKM/Malament $\to$ (-,+,+,+). CLOSED.
+
+
+
+T8 d = 4 derived                 8             d $\leq$ 3 hard-excluded (no graviton DOF). d = 4 minimal. CLOSED.
+
+
+
+T11 cosmological constant        11            Λ = global capacity residual. Explains smallness + sign. NEW.
+
+
+
+Dark matter section              12            DM = C_ext geometric capacity. No particles predicted. NEW.
+
+
+
+Summary table expanded           14.1          Added T10, T11, DM with full epistemic tags
+
+
+
+$\Delta$_geo appendix                   App. A        Complete sub-gap resolution table
+
+
+
+Date updated                     Header        1/30/2026 $\to$ 2/8/2026
+
+
+
+
+\end{document}

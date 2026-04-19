@@ -1,0 +1,189 @@
+# Dynamics and Geometry as Optimal Admissible Reallocation
+
+### Interactive Mathematical Appendix to Paper 6 of the Admissibility Physics Framework
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18604874.svg)](https://doi.org/10.5281/zenodo.18604874) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Ethan-Brooke/APF-Paper-6-Dynamics-Geometry-Spacetime-Gravity/blob/main/APF_Reviewer_Walkthrough.ipynb)
+
+[Interactive Derivation DAG](https://ethan-brooke.github.io/APF-Paper-6-Dynamics-Geometry-Spacetime-Gravity/) · [Theorem Map](#theorem-mapping-table) · [Reviewers' Guide](REVIEWERS_GUIDE.md) · [The full APF corpus](#the-full-apf-corpus) · [Citation](#citation)
+
+> **AI agents:** start with [`START_HERE.md`](START_HERE.md) — operational checklist that loads the framework context in 5–10 minutes. The corpus inventory and full file map are in [`ai_context/repo_map.json`](ai_context/repo_map.json).
+
+---
+
+## Why this codebase exists
+
+Spacetime, gravity, cosmology, and action principle from optimal admissible reallocation. Einstein equations from Lovelock uniqueness in d=4; geodesic motion from cost-minimizing paths; cosmological-constant structure from horizon equipartition; DESI-era dynamical dark-energy commitments. Draft .tex (578 lines, v1.0) extant; PLEC propagation pending.
+
+This repository is the executable proof.
+
+The codebase is a faithful subset of the canonical APF codebase v6.9 (frozen 2026-04-18; 355 verify_all checks, 342 bank-registered theorems across 19 modules + `apf/standalone/`). Each theorem in the manuscript traces to a named `check_*` function in `apf/core.py`, which can be called independently and returns a structured result.
+
+The codebase requires Python 3.8+ and NumPy / SciPy (some numerical lemmas use them; see `pyproject.toml`).
+
+## How to verify
+
+Three paths, in order of increasing friction:
+
+**1. Colab notebook — zero install.** [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Ethan-Brooke/APF-Paper-6-Dynamics-Geometry-Spacetime-Gravity/blob/main/APF_Reviewer_Walkthrough.ipynb) Every key theorem is derived inline, with annotated cells you can inspect and modify. Run all cells — the full verification takes under a minute.
+
+**2. Browser — zero install.** Open the [Interactive Derivation DAG](https://ethan-brooke.github.io/APF-Paper-6-Dynamics-Geometry-Spacetime-Gravity/). Explore the dependency graph. Hover any node for its mathematical statement, key result, and shortest derivation chain to A1. Click **Run Checks** to watch all theorems verify in topological order.
+
+**3. Local execution.**
+
+```bash
+git clone https://github.com/Ethan-Brooke/APF-Paper-6-Dynamics-Geometry-Spacetime-Gravity.git
+cd APF-Paper-6-Dynamics-Geometry-Spacetime-Gravity
+pip install -e .
+python run_checks.py
+```
+
+Expected output:
+
+```
+      Paper 6 (Dynamics and Geometry as Optimal Admissible Reallocation): 22 passed, 0 failed, 22 total — verified in <minutes>
+```
+
+**4. Individual inspection.**
+
+```python
+from apf.bank import get_check
+r = get_check('check_Regime_exit_Type_II')()
+print(r['key_result'])
+```
+
+For reviewers, a [dedicated guide](REVIEWERS_GUIDE.md) walks through the logical architecture, the structural assumptions, and the anticipated objections.
+
+---
+
+## Theorem mapping table
+
+This table maps every result in the manuscript to its executable verification.
+
+| Check | Type | Summary |
+|-------|------|---------|
+| `check_Regime_exit_Type_II` | Other | Regime_exit_Type_II: Minimizer Nonuniqueness (Branching) [P]. |
+| `check_Regime_exit_Type_III` | Other | Regime_exit_Type_III: Change of Admissible Class (Record Locking) [P]. |
+| `check_L_irr` | Lemma | L_irr: Irreversibility from Admissibility Physics. |
+| `check_L_Gleason_finite` | Lemma | L_Gleason_finite: Born Rule from Frame Function (Finite-Dim) [P]. |
+| `check_T_Bek` | Theorem | T_Bek: Bekenstein Bound from Interface Capacity. |
+| `check_Regime_exit_Type_I` | Other | Regime_exit_Type_I: Collapse of Admissible Variation (Saturation) [P]. |
+| `check_Regime_exit_Type_IV` | Other | Regime_exit_Type_IV: Loss of Smooth or Local Structure [P]. |
+| `check_Regime_exit_Type_V` | Other | Regime_exit_Type_V: Pure Representational Redundancy [P]. |
+| `check_T7B` | Theorem | T7B: Metric Uniqueness from Polarization Identity. |
+| `check_L_HKM_causal_geometry` | Lemma | L_HKM_causal_geometry: Causal Order Determines Conformal Geometry [P]. |
+| `check_L_Malament_uniqueness` | Lemma | L_Malament_uniqueness: Conformal Geometry Uniquely Fixed [P]. |
+| `check_T8` | Theorem | T8: Spacetime Dimension d = 4 from Admissibility. |
+| `check_T10` | Theorem | T10: Newton's Constant from de Sitter Entropy [P]. |
+| `check_T9_grav` | Theorem | T9_grav: Einstein Equations from Admissibility + Lovelock. |
+| `check_A9_closure` | Other | A9_closure: Unified Lovelock-Prerequisite Closure (A9.1..A9.5) [P]. |
+| `check_T11` | Theorem | T11: Cosmological Constant Lambda from Global Capacity Residual. |
+| `check_L_equation_of_state` | Lemma | L_equation_of_state: w = -1 Exactly at All Epochs [P]. |
+| `check_L_DESI_response` | Lemma | L_DESI_response: APF w₀/w_a Prediction vs DESI DR2 [P]. |
+| `check_L_saturation_partition` | Lemma | L_saturation_partition: Type-Count Partition is Saturation-Independent [P]. |
+| `check_L_equip` | Lemma | L_equip: Horizon Equipartition ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â capacity fractions = energy density fractions. |
+| `check_L_anomaly_free` | Lemma | L_anomaly_free: Gauge Anomaly Cancellation Cross-Check [P]. |
+| `check_Regime_R` | Other | Regime_R: PLEC Well-Posedness under R1..R4 [P]. |
+
+All check functions reside in `apf/core.py`. Every function listed above can be called independently and returns a structured result including its logical dependencies and the mathematical content it verifies.
+
+---
+
+## The derivation chain
+
+```
+  Level 0: Regime_exit_Type_II · Regime_exit_Type_III · L_irr · L_Gleason_finite · T_Bek · Regime_exit_Type_I · Regime_exit_Type_IV · Regime_exit_Type_V · T7B · L_HKM_causal_geometry · L_Malament_uniqueness · T8 · T10 · T9_grav · A9_closure · T11 · L_equation_of_state · L_DESI_response · L_saturation_partition · L_equip · L_anomaly_free · Regime_R
+```
+
+The [interactive DAG](https://ethan-brooke.github.io/APF-Paper-6-Dynamics-Geometry-Spacetime-Gravity/) shows the full graph with hover details and animated verification.
+
+---
+
+## Repository structure
+
+```
+├── README.md                              ← you are here
+├── START_HERE.md                          ← AI operational checklist; read-first for AI agents
+├── REVIEWERS_GUIDE.md                     ← physics-first walkthrough for peer reviewers
+├── interactive_dag.html                   ← interactive D3.js derivation DAG (also served at docs/ via GitHub Pages)
+├── repo_map.json                          ← machine-readable map of this repo (root copy of ai_context/repo_map.json)
+├── theorems.json                          ← theorem catalog (root copy of ai_context/theorems.json)
+├── derivation_graph.json                  ← theorem DAG as JSON (root copy of ai_context/derivation_graph.json)
+├── ai_context/                            ← AI onboarding pack (corpus map, theorems, glossary, etc.)
+│   ├── AGENTS.md                          ← authoritative entry point for AI agents
+│   ├── FRAMEWORK_OVERVIEW.md              ← APF in 5 minutes
+│   ├── GLOSSARY.md                        ← axioms, PLEC primitives, epistemic tags
+│   ├── AUDIT_DISCIPLINE.md                ← engagement posture for critique/proposal
+│   ├── OPEN_PROBLEMS.md                   ← catalog of open problems + verdicts
+│   ├── repo_map.json                      ← machine-readable map of this repo
+│   ├── theorems.json                      ← machine-readable theorem catalog
+│   ├── derivation_graph.json              ← theorem DAG as JSON
+│   └── wiki/                              ← bundled APF wiki (concepts, papers, codebase)
+├── apf/
+│   ├── core.py                            ← 22 theorem check functions
+│   ├── apf_utils.py                       ← exact arithmetic + helpers
+│   └── bank.py                            ← registry and runner
+├── docs/
+│   └── index.html                         ← interactive derivation DAG (GitHub Pages)
+├── APF_Reviewer_Walkthrough.ipynb         ← Colab notebook
+├── run_checks.py                          ← convenience entry point
+├── pyproject.toml                         ← package metadata
+├── zenodo.json                            ← archival metadata
+├── Paper_6_Dynamics_Geometry_Spacetime_Gravity_v2.0-PLEC.tex                ← the paper
+
+└── LICENSE                                ← MIT
+```
+
+---
+
+## What this paper derives and what it does not
+
+**Derived:** (see Theorem mapping table above)
+
+**Not derived here:** Specific results outside this paper's scope live in companion papers — see the corpus table below for the full 9-paper series.
+
+---
+
+## Citation
+
+```bibtex
+@software{apf-paper6,
+  title   = {Dynamics and Geometry as Optimal Admissible Reallocation},
+  author  = {Brooke, Ethan},
+  year    = {2026},
+  doi     = {10.5281/zenodo.18604874},
+  url     = {https://github.com/Ethan-Brooke/APF-Paper-6-Dynamics-Geometry-Spacetime-Gravity}
+}
+```
+
+For the full citation lineage (concept-DOI vs version-DOI, related identifiers, bibtex for all corpus papers), see [`ai_context/CITING.md`](ai_context/CITING.md).
+
+---
+
+## The full APF corpus
+
+This repository is **one paper-companion** in a 9-paper series. Each paper has its own companion repo following this same layout. The full corpus, with canonical references:
+
+| # | Title | Zenodo DOI | GitHub repo | Status |
+|---|---|---|---|---|
+| 0 | What Physics Permits | [10.5281/zenodo.18605692](https://doi.org/10.5281/zenodo.18605692) | [`APF-Paper-0-What-Physics-Permits`](https://github.com/Ethan-Brooke/APF-Paper-0-What-Physics-Permits) | public |
+| 1 | The Enforceability of Distinction | [10.5281/zenodo.18604678](https://doi.org/10.5281/zenodo.18604678) | [`APF-Paper-1-The-Enforceability-of-Distinction`](https://github.com/Ethan-Brooke/APF-Paper-1-The-Enforceability-of-Distinction) | public |
+| 2 | The Structure of Admissible Physics | [10.5281/zenodo.18604839](https://doi.org/10.5281/zenodo.18604839) | [`APF-Paper-2-The-Structure-of-Admissible-Physics`](https://github.com/Ethan-Brooke/APF-Paper-2-The-Structure-of-Admissible-Physics) | public |
+| 3 | Ledgers | [10.5281/zenodo.18604844](https://doi.org/10.5281/zenodo.18604844) | [`APF-Paper-3-Ledgers-Entropy-Time-Cost`](https://github.com/Ethan-Brooke/APF-Paper-3-Ledgers-Entropy-Time-Cost) | public |
+| 4 | Admissibility Constraints and Structural Saturation | [10.5281/zenodo.18604845](https://doi.org/10.5281/zenodo.18604845) | [`APF-Paper-4-Admissibility-Constraints-Field-Content`](https://github.com/Ethan-Brooke/APF-Paper-4-Admissibility-Constraints-Field-Content) | public |
+| 5 | Quantum Structure from Finite Enforceability | [10.5281/zenodo.18604861](https://doi.org/10.5281/zenodo.18604861) | [`APF-Paper-5-Quantum-Structure-Hilbert-Born`](https://github.com/Ethan-Brooke/APF-Paper-5-Quantum-Structure-Hilbert-Born) | public |
+| 6 | Dynamics and Geometry as Optimal Admissible Reallocation **(this repo)** | [10.5281/zenodo.18604874](https://doi.org/10.5281/zenodo.18604874) | [`APF-Paper-6-Dynamics-Geometry-Spacetime-Gravity`](https://github.com/Ethan-Brooke/APF-Paper-6-Dynamics-Geometry-Spacetime-Gravity) | public |
+| 7 | Action, Internalization, and the Lagrangian | [10.5281/zenodo.18604875](https://doi.org/10.5281/zenodo.18604875) | [`APF-Paper-7-Action-Internalization-Lagrangian`](https://github.com/Ethan-Brooke/APF-Paper-7-Action-Internalization-Lagrangian) | public |
+| 13 | The Minimal Admissibility Core | [10.5281/zenodo.18614663](https://doi.org/10.5281/zenodo.18614663) | [`APF-Paper-13-The-Minimal-Admissibility-Core`](https://github.com/Ethan-Brooke/APF-Paper-13-The-Minimal-Admissibility-Core) | public |
+| — | Canonical codebase (v6.9) | [10.5281/zenodo.18604548](https://doi.org/10.5281/zenodo.18604548) | [`APF-Codebase`](https://github.com/Ethan-Brooke/APF-Codebase) | pending |
+
+The canonical computational engine — the full bank of 342 theorems across 19 modules — is the **APF Codebase** ([Zenodo](https://doi.org/10.5281/zenodo.18604548)). Every per-paper repo is a faithful subset of that engine.
+
+---
+
+## License
+
+MIT. See [LICENSE](LICENSE).
+
+---
+
+*Generated by the APF `create-repo` skill on 2026-04-19. Codebase snapshot: v6.9 (frozen 2026-04-18; 355 verify_all checks, 342 bank-registered theorems, 48 quantitative predictions).*

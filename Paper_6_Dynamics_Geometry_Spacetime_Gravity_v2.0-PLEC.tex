@@ -1,0 +1,957 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black]{hyperref}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{setspace}
+\setstretch{1.05}
+\setlength{\parskip}{0.65em}
+\setlength{\parindent}{0pt}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newcommand{\coderef}[2]{\texttt{#1}\,(\texttt{#2})}
+
+\newtcolorbox{apfbox}{
+  breakable, enhanced,
+  colback=black!3, colframe=black!30,
+  boxrule=0.6pt, arc=2pt,
+  left=8pt, right=8pt, top=8pt, bottom=8pt
+}
+
+\newtcolorbox{wayfinder}{
+  breakable, enhanced,
+  colback=blue!3, colframe=blue!40,
+  boxrule=0.7pt, arc=2pt,
+  left=8pt, right=8pt, top=8pt, bottom=8pt,
+  title={\textbf{Wayfinder}},
+  fonttitle=\bfseries,
+  coltitle=blue!50!black, colbacktitle=blue!10
+}
+
+\newtcolorbox{bridgebox}{
+  breakable, enhanced,
+  colback=orange!3, colframe=orange!50,
+  boxrule=0.7pt, arc=2pt,
+  left=8pt, right=8pt, top=8pt, bottom=8pt,
+  title={\textbf{Bridge}},
+  fonttitle=\bfseries,
+  coltitle=orange!60!black, colbacktitle=orange!10
+}
+
+\newtcolorbox{statusbox}{
+  breakable, enhanced,
+  colback=red!3, colframe=red!40,
+  boxrule=0.7pt, arc=2pt,
+  left=8pt, right=8pt, top=8pt, bottom=8pt,
+  title={\textbf{Status fence}},
+  fonttitle=\bfseries,
+  coltitle=red!60!black, colbacktitle=red!10
+}
+
+\title{Paper 6 --- REPRESENTATIONS (Dynamics \& Geometry):\\
+Dynamics and Geometry as Least-Cost Admissible Reallocation\\[2pt]
+\large Variational Form, Metric Structure, Einstein Equations, and Their Regime Boundaries}
+\author{E. Brooke}
+\date{April 2026 (v2.0-PLEC)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This paper derives dynamics and geometry as representational structures that emerge
+when admissibility constraints support smooth, locally additive bookkeeping over a
+connected admissible path class. Equations of motion arise only in restricted
+regimes; outside these regimes --- at saturation, branching, record locking, or
+horizons --- variational dynamics ceases to be meaningful, though admissibility
+accounting remains well-defined. Geometry emerges by the same route: distance is
+minimal correlation cost, curvature arises from capacity gradients, and Einstein's
+equations appear as the unique closure relation in four dimensions (Lovelock
+uniqueness). The v2.0-PLEC release reframes the derivation around the Principle
+of Least Enforcement Cost (PLEC): admissibility fixes the licensable continuation
+class; PLEC selects the realized continuation as a least-cost path within that
+class; failure of dynamical or geometric representation is recast as one of five
+formally distinct regime-exit types. Imported closure theorems (HKM, Malament,
+Lovelock) are tagged as imports closing an APF-prepared admissible class. The
+dark-matter-as-$C_{\mathrm{ext}}$ identification is fenced as a structural
+proposal with empirical consequences, not as a theorem-level closure.
+\end{abstract}
+
+\begin{wayfinder}
+\textbf{Operational primitives used in this paper.}
+\begin{itemize}[leftmargin=1.5em,nosep]
+    \item \textbf{Admissible class $\mathcal{A}_{\Gamma}$:} continuations
+    physically licensable in context $\Gamma$ under A1.
+    \item \textbf{Enforcement-cost functional $E_{\Gamma}$:} total capacity burden
+    of a continuation; on paths, an action functional $K[q] = \int L\,dt$.
+    \item \textbf{PLEC selection $q^{\ast}$:} realized continuation,
+    $q^{\ast} \in \arg\min_{q \in \mathcal{P}_{\Gamma}} K[q]$.
+    \item \textbf{Regime R:} smooth, locally additive enforcement cost on a
+    connected admissible path space without saturation. Variational and geometric
+    representation valid here.
+    \item \textbf{Regime exit:} failure of one or more Regime R conditions.
+    Catalogued in five formally distinct types (\S\ref{sec:exit-taxonomy}).
+\end{itemize}
+This paper writes Euler--Lagrange dynamics and Lovelock geometry as the realized
+PLEC selectors on the Regime R admissible class, and writes saturation, branching,
+record locking, horizons, singularities, and topology change as different formal
+exits from that representational class.
+\end{wayfinder}
+
+\section*{Shared Canonical Frame (Papers 5--6)}
+
+\begin{apfbox}
+\textbf{Meaning, Admissibility, Realization, Regime Exit.}
+\begin{enumerate}[leftmargin=1.6em]
+    \item \textbf{Meaning.} A distinction is physically meaningful iff it is
+    robustly enforceable under admissible perturbations.
+    \item \textbf{Admissibility.} A configuration, path, or representation is
+    admissible iff its total enforcement demand does not exceed available capacity.
+    \item \textbf{Realization.} When the admissible class is nonempty and the
+    enforcement-cost functional is well-defined on it, realized physical structure
+    is selected as the least-enforcement-cost member of that admissible class.
+    \item \textbf{Regime exit.} When the conditions required for comparison by
+    smooth finite cost fail, the representation exits its domain, while the deeper
+    admissibility constraints remain in force.
+\end{enumerate}
+\end{apfbox}
+
+\section*{Part I: Dynamics}
+
+\section{Introduction}
+
+\subsection{The Standard View}
+In conventional physics, dynamics and geometry are taken as primitive. Equations
+of motion are postulated; spacetime is assumed as an arena. The questions ``why
+do physical laws take variational form?'' or ``why is gravity geometric?'' are
+rarely asked at the level of structure.
+
+\subsection{The Constraint-First Inversion}
+This paper asks: under what conditions do equations of motion exist at all? Under
+what conditions does geometric description become meaningful? What happens when
+those conditions fail? The central claim is that dynamics and geometry are
+\emph{regime-dependent representations of admissible correlation reallocation}.
+They emerge as PLEC selectors when correlation capacity admits smooth
+redistribution, enforcement cost is locally additive, and saturation boundaries
+are not encountered. They exit cleanly in five distinct ways when those
+conditions fail.
+
+\section{Canonical PLEC Schema (Path Form)}\label{sec:plec}
+
+\begin{definition}[Admissible path class]
+Let $\Gamma$ denote a physical context, interface, or regime. Let $\mathcal{P}_{\Gamma}$
+denote the set of admissible paths joining fixed endpoints in configuration space
+in context $\Gamma$.
+\end{definition}
+
+\begin{definition}[Enforcement-cost functional on paths]
+Let $K_{\Gamma} : \mathcal{P}_{\Gamma} \to [0,\infty)$ assign the total accumulated
+enforcement cost along a path $q(t)$ in $\Gamma$. In Regime~R (\S\ref{sec:regimeR}),
+$K_{\Gamma}[q] = \int L(q,\dot q,t)\,dt$ for a local cost density $L$.
+\end{definition}
+
+\begin{definition}[PLEC selection on paths]
+A realized continuation $q^{\ast}$ in context $\Gamma$ is selected by
+\[
+q^{\ast} \in \operatorname*{arg\,min}_{q \in \mathcal{P}_{\Gamma}} K_{\Gamma}[q].
+\]
+When the minimizer is unique up to the relevant equivalence relation, the realized
+continuation is unique up to that equivalence.
+\end{definition}
+
+\section{Admissibility Does Not Yet Determine Realized Evolution}
+
+Admissibility determines which correlation structures are physically licensable.
+It specifies the class of jointly enforceable configurations and rules out those
+that overspend finite capacity. In this sense, admissibility provides necessary
+conditions for physical meaningfulness. But admissibility alone does not yet
+determine realized evolution. Given an admissible initial state, there may exist
+multiple distinct admissible continuations. The admissibility framework therefore
+fixes the \emph{allowed class} of continuations without, by itself, selecting a
+unique realized one.
+
+This distinction is fundamental. The framework must separate three questions
+that are often run together:
+\begin{enumerate}[leftmargin=1.6em]
+    \item \textbf{Meaning:} when is a distinction physically meaningful at all?
+    \item \textbf{Admissibility:} which continuations are jointly enforceable
+    under finite capacity?
+    \item \textbf{Realization:} which admissible continuation is physically
+    realized?
+\end{enumerate}
+Papers~1--4 answer the first two questions at the level of enforceable
+distinction and capacity-bounded admissibility. The task of the present paper is
+to identify the additional regime conditions under which the third question
+becomes mathematically well-posed. \emph{Dynamics is not automatic from
+admissibility; it arises only when the admissible class carries enough structure
+to support a least-cost selection principle.}
+
+\section{Regime R --- When Least-Cost Selection Becomes Meaningful}\label{sec:regimeR}
+
+Let $\mathcal{A}_{\Gamma}$ denote the class of admissible continuations in
+context $\Gamma$. In general, $\mathcal{A}_{\Gamma}$ may be disconnected,
+non-smooth, or terminate at saturation boundaries. In such cases, there need be
+no meaningful notion of a realized path selected from within
+$\mathcal{A}_{\Gamma}$. A dynamical representation becomes available only in a
+restricted regime:
+
+\begin{enumerate}[label=(R\arabic*),leftmargin=1.8em]
+    \item Enforcement cost varies smoothly over admissible correlation sets.
+    \item Cost is locally additive over interfaces.
+    \item Admissible continuations form a connected path space.
+    \item No saturation boundary is encountered along the path.
+\end{enumerate}
+
+When all four conditions hold, the admissible class supports a well-defined cost
+functional on paths. In that regime, physical realization can be expressed as
+\emph{least-cost admissible reallocation}: among admissible continuations, the
+realized path is the one minimizing accumulated enforcement cost.
+
+This is the variational content of the framework. It is not an additional
+dynamical postulate imposed from outside. It is the structural consequence of
+asking for realized evolution only where the admissible class admits comparison
+by smooth finite cost.
+
+\section{Least-Cost Admissible Paths and Euler--Lagrange Form}\label{sec:EL}
+
+In Regime~R, the accumulated enforcement cost along a path defines an action
+functional
+\[
+K[q] = \int L(q,\dot q,t)\,dt,
+\]
+where $L$ is the local enforcement-cost density. The physical claim is then:
+
+\begin{apfbox}
+\textbf{Selection Principle (PLEC in Regime R).} The realized continuation is a
+least-enforcement-cost member of the admissible path class:
+\[
+q^{\ast} \in \operatorname*{arg\,min}_{q \in \mathcal{P}_{\Gamma}} K[q].
+\]
+\end{apfbox}
+
+Once this selection principle is available, standard variational reasoning
+applies. Extremal admissible paths satisfy the Euler--Lagrange equations
+\[
+\frac{d}{dt}\left(\frac{\partial L}{\partial \dot q}\right) - \frac{\partial L}{\partial q} = 0.
+\]
+These equations are therefore not primitive laws. They are the coordinate
+expression of least-cost selection within the admissible class.
+
+The usual conservation laws follow in the same way. Whenever the cost functional
+has a continuous symmetry, Noether's theorem identifies the corresponding
+conserved quantity. Energy conservation expresses invariance of enforcement cost
+under time translation; momentum conservation expresses invariance under spatial
+translation. The standard dynamical formalism appears as a \emph{representation of
+admissible least-cost realization}, not as an independent ontological layer.
+
+\section{Where Least-Cost Dynamical Representation Fails}\label{sec:dyn-fails}
+
+These are not breakdowns of admissibility itself. They are breakdowns of the
+hypotheses under which realized evolution can be represented as least-cost
+variation over a smooth admissible path class. When Regime~R fails,
+admissibility accounting remains valid, but Euler--Lagrange form ceases to be
+meaningful.
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Mode & Failed hypothesis & Consequence \\
+\midrule
+Saturation & Collapse of admissible variation & No nontrivial local variation remains \\
+Branching & Minimizer nonuniqueness & No single effective equation of motion \\
+Record locking & Change of admissible class & Exit to record-dominated description \\
+Horizons & Failure of admissible extendibility & Dynamical inaccessibility from within regime \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The important point is that the representational layer fails in different ways
+depending on which hypothesis breaks. There is no single ``failure of dynamics'';
+there are several distinct failures of least-cost selection structure, each with
+its own structural fingerprint.
+
+\textbf{On branching.} Branching is not merely the existence of multiple
+admissible continuations. It is the failure of uniqueness for the least-cost
+selector on the admissible class. When multiple inequivalent minimizers exist,
+admissibility remains intact, but the representational layer no longer supports
+a unique effective dynamics. The correct conclusion is not that physical law
+fails, but that the given regime no longer compresses realized evolution into a
+single variational trajectory.
+
+\section{Taxonomy of Regime Exit}\label{sec:exit-taxonomy}
+
+To unify the representation failures discussed across Papers~5 and~6, we
+distinguish five structurally different kinds of regime exit. This taxonomy
+provides a common project-level vocabulary.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.82\textwidth]{Fig_Admissible_States_Diagram.pdf}
+\caption{\textbf{Admissible states and correlation-capacity space.} The upper
+bulb is the admissible class $\mathcal{A}_{\Gamma}$ (Paper~5/6 \S2); its
+boundary is where admissibility fails (flanking shaded regions, labeled
+``Not Admissible''). The downward arrow is Regime~R (\S\ref{sec:regimeR}):
+time emerges as the direction of cost-functional integration along an
+admissible path, not as a primitive coordinate. At the narrowing near the
+bottom, the locking interface marks the failure mode of unique PLEC
+selection. Branching into three tubes visualizes Type~II
+(\coderef{check\_Regime\_exit\_Type\_II}{plec.py}) — non-unique minimizers
+of the cost functional. The step to three distinct downstream classes (the
+``exclusive correlation histories,'' each associated with its own
+record-locked sector) visualizes Type~III
+(\coderef{check\_Regime\_exit\_Type\_III}{plec.py}) — change of admissible
+class at the locking interface, the mechanism identified in
+\coderef{check\_L\_irr}{core.py} whereby correlation pathways become
+inaccessible to local operations (not infinite-cost; locally
+unrecoverable while remaining globally admissible). Probability assignments
+are defined only on the entropy slice downstream of locking
+(\coderef{check\_L\_Gleason\_finite}{supplements.py}); before branching,
+the system is in the pre-statistical coherent regime of Paper~5.
+Types~I (saturation collapse), IV (loss of smooth structure), and V (pure
+representational redundancy) are not branching-type exits and are not
+depicted; they are covered separately in \S\ref{sec:dyn-fails} and
+\S\ref{sec:geo-fails}. The volume/area imagery at the bottom
+(``capacity is a volume, entropy is an area'') is a visual anchor for
+the Bekenstein area-law relation \coderef{check\_T\_Bek}{gravity.py}, not
+a literal 2--3 dimensional assertion: the admissible class is generally
+higher-dimensional and the entropy slice is an interface whose
+area-scaling is the physical content.}
+\label{fig:admissible-states}
+\end{figure}
+
+Figure~\ref{fig:admissible-states} visualizes the full arc of this section
+at a glance. A reader tracking the five types below can consult the figure
+as the running example for Types~II and~III; the remaining types (I, IV,
+V) are qualitatively different and need no figure.
+
+\subsection{Type I: Collapse of admissible variation}
+A representational regime fails when the admissible neighborhood around a state
+or path collapses, so that no nontrivial admissible variation remains. This is
+the canonical saturation case. In Paper~6 language, the variational
+representation fails because the local path class becomes trivial; in Paper~5
+language, coherent refinement fails because no reversible alternatives remain.
+
+\subsection{Type II: Minimizer nonuniqueness}
+A regime can also fail to determine a single realized continuation even when
+admissible paths still exist. This is the branching case: the admissible class
+remains nonempty, but the least-cost selector fails to be unique up to the
+relevant equivalence relation. The correct interpretation is not that physical
+law has failed, but that the representational layer no longer supports a unique
+effective dynamics.
+
+\subsection{Type III: Change of admissible class}
+Some regime exits occur because the relevant admissible class itself changes.
+Measurement is the prototype. Before record formation, the relevant class is the
+coherent bookkeeping class; after irreversible logging, the relevant class is the
+record-locked class on $M_{\mathrm{sys}} \otimes Z_R$. The transition is
+therefore not a breakdown internal to a single representational scheme, but a
+transfer to a different admissible domain.
+
+\subsection{Type IV: Loss of smooth or local structure}
+A regime may remain admissible while losing the regularity assumptions required
+for a geometric or variational description. Singularities, Planck-scale
+discreteness, and topology change belong here. The issue is not loss of
+admissibility, but loss of the smoothness, local additivity, tangent-space
+structure, or chartability required for the relevant representation.
+
+\subsection{Type V: Pure representational redundancy}
+Finally, some apparent failures are not physical exits at all, but breakdowns of
+a chosen representation. Gauge redundancy and nonunique coordinate descriptions
+fall in this class. The admissible structure and realized minimizer remain
+intact; only the descriptive coding is nonunique. This category prevents
+conflating genuine regime exit with bookkeeping arbitrariness.
+
+\subsection{Canonical use across the APF series}
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Phenomenon & Type & Coderef (v6.9) \\
+\midrule
+Paper~5 measurement & III (with I in fully locked limit) & \coderef{check\_Regime\_exit\_Type\_III}{plec.py} \\
+Paper~6 saturation & I & \coderef{check\_Regime\_exit\_Type\_I}{plec.py} \\
+Paper~6 branching & II & \coderef{check\_Regime\_exit\_Type\_II}{plec.py} \\
+Paper~6 horizons & II / III & \coderef{check\_Regime\_exit\_Type\_II}{plec.py} / \coderef{check\_Regime\_exit\_Type\_III}{plec.py} \\
+Paper~6 singularities, Planck discreteness, topology change & IV & \coderef{check\_Regime\_exit\_Type\_IV}{plec.py} \\
+Gauge / coordinate ambiguity & V & \coderef{check\_Regime\_exit\_Type\_V}{plec.py} \\
+\bottomrule
+\end{tabular}
+\end{center}
+The strategic payoff is conceptual hygiene: measurement, horizons, saturation,
+and geometry failure are different species of representational regime exit, all
+subordinate to the deeper admissibility layer rather than independent mysteries.
+As of v6.9 (2026-04-18), each type is a registered bank check with an
+executable witness; the taxonomy is no longer prose but formalized
+machinery.
+
+\section*{Part II: Geometry}
+
+\section{Correlation Cost and Distance}
+
+\subsection{Definition of Distance}
+\begin{definition}[Correlation distance]
+The distance between regions $A$ and $B$ is the minimal irreducible correlation
+cost required to jointly enforce coordination between them:
+\[
+d(A,B) \equiv \inf_{\Gamma : A \to B} \int C\,d\Gamma,
+\]
+where $C$ is the correlation cost density along path $\Gamma$.
+\end{definition}
+Correlation distance satisfies non-negativity, identity of indiscernibles, and
+the triangle inequality. These are forced by enforcement-cost structure, not
+assumed.
+
+\subsection{Geodesics as Least-Cost Paths}
+Paths minimizing correlation cost define geodesics. Along such paths, relational
+structure is maintained with minimal capacity expenditure. Free motion is
+least-cost coordination. No force law is required.
+
+\section{The Metric Tensor from Non-Factorization (T7B)}
+
+\subsection{Non-Factorization Implies Geometric Response}
+\begin{theorem}[T7B, Metric tensor from quadratic non-factorizing response]
+At shared (non-factorizing) interfaces, the external feasibility functional is
+quadratic in displacement. By the polarization identity, a functional that is
+(a) non-degenerate (A1: finite capacity implies no zero-cost directions),
+(b) continuous (Lipschitz, from finite-bounded cost), and (c) defined on
+tangent vectors at each point (from $T_{\mathrm{continuum}}$ smooth structure)
+is a metric tensor $g_{\mu\nu}$.
+\end{theorem}
+Formal verification: \coderef{check\_T7B}{gravity.py}.
+
+This is a definition-level identification: a non-degenerate symmetric bilinear
+form on the tangent space at each point \emph{is} a metric tensor. The framework
+does not postulate geometry; it computes it from quadratic cost at shared
+interfaces. Tag: [P\_structural].
+
+\subsection{Lorentzian Signature $(-,+,+,+)$}
+A4 (irreversibility) implies a strict partial order on admissible
+configurations. By the Hawking--King--McCarthy (HKM, 1976) theorem, a strict
+partial order on events satisfying appropriate density conditions determines the
+conformal structure. Combined with Malament's theorem (1977) and volume
+normalization ($\Omega = 1$ by Radon--Nikodym uniqueness), this fixes the
+Lorentzian signature with exactly one timelike direction.
+
+\begin{bridgebox}
+HKM and Malament are imported as closure theorems on an APF-prepared admissible
+class: APF supplies the strict partial order from A4 and the volume
+normalization; the imports close the conformal structure and signature
+identification. APF-internal preparation checks:
+\coderef{check\_L\_HKM\_causal\_geometry}{extensions.py} and
+\coderef{check\_L\_Malament\_uniqueness}{extensions.py}.
+Tag: [P\_structural] + [I: HKM 1976, Malament 1977].
+\end{bridgebox}
+
+\section{Spacetime Dimension $d = 4$ (T8)}
+
+\begin{theorem}[T8, $d = 4$ as the minimal admissible spacetime dimension]
+$d \le 3$ is hard-excluded: $d = 3$ has zero propagating graviton degrees of
+freedom (no gravitational records, violating A4); $d = 2, 3$ lack knots for
+topological stability of bound states. $d = 4$ is the minimum dimension with
+propagating gravity (2 DOF), knot stability, and capacity efficiency
+($C_{\mathrm{ext}}/C_{\mathrm{int}} = 0.5$). $d \ge 5$ is disfavored by A5
+(genericity: extra graviton modes provide no admissibility benefit).
+\end{theorem}
+
+The internal sector uses $C_{\mathrm{int}} = 12$ (dim $SU(3)\!\times\!SU(2)\!\times\!U(1)$),
+leaving $C_{\mathrm{ext}}$ for geometric degrees of freedom. In $d=4$, the
+graviton has 2 propagating DOF, the minimum for A4-compatible gravitational
+records. Tag: [P\_structural]. Formal verification: \coderef{check\_T8}{spacetime.py}.
+
+\section{Curvature from Capacity Gradients}
+
+Correlation capacity is generally non-uniform. Capacity gradients cause geodesic
+deviation: paths converge in low-capacity regions (bottlenecks) and diverge in
+high-capacity regions. \emph{Curvature is the geometric signature of correlation
+load} --- not a postulated feature of spacetime but a derived consequence of
+capacity distribution.
+
+The stiffness parameter $G$ (Newton's constant) sets the scale of geometric
+response to correlation load: (curvature change) $\sim G \times$ (load change).
+$G$ is not a coupling strength but the rate at which geometry bends under
+correlation burden. Structurally, $\kappa \sim 1/C_{\ast}$ where $C_{\ast}$ is
+the total geometric capacity (T10). Tag: [P\_structural], scaling only.
+Formal verification: \coderef{check\_T10}{gravity.py}.
+
+\section{Einstein's Equations from $\Delta_{\mathrm{geo}}$ Closure}
+
+\subsection{The Geometric Prerequisites}
+The complete $\Delta_{\mathrm{geo}}$ gap is closed: all five geometric
+prerequisites (A9.1--A9.5) are derived from the axioms, not assumed.
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Prerequisite & Derivation \\
+\midrule
+A9.1 Locality & A1 + finite-bounded cost \\
+A9.2 Covariance & T7B \\
+A9.3 Conservation & A1 (capacity cannot be created or destroyed) \\
+A9.4 Second-order & A4 + Ostrogradsky (no higher-derivative instabilities) \\
+A9.5 Propagation & A4 (records require gravitational DOF) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Lovelock Uniqueness}
+\begin{theorem}[Lovelock 1971, as a closure on the APF-prepared geometric class]
+In $d=4$, the only symmetric, divergence-free tensor $G_{\mu\nu}$ that depends
+on the metric and its first and second derivatives (linearly in second
+derivatives) is the Einstein tensor plus a cosmological term.
+\end{theorem}
+
+A9.1--A9.5 are precisely Lovelock's conditions. The unique field equation is
+\[
+G_{\mu\nu} + \Lambda g_{\mu\nu} = \kappa T_{\mu\nu}.
+\]
+Einstein's equations are not postulated. They are the unique
+admissibility-preserving geometric response in $d=4$. The equivalence principle
+follows: because correlation cost depends only on capacity distribution (not
+internal properties), all systems follow the same least-cost paths. Universality
+of free fall follows from universality of correlation constraints. Tag:
+[P\_structural] + [I: Lovelock 1971]. Formal closure: \coderef{check\_T9\_grav}{gravity.py}; the unified A9
+prerequisite closure is \coderef{check\_A9\_closure}{gravity.py} (v6.9
+NEW), which audits all five A9.1--A9.5 prerequisites as a single check
+rather than requiring readers to cross-reference \texttt{gravity.py},
+\texttt{spacetime.py}, and \texttt{internalization\_geo.py}
+individually.
+
+\section{The Cosmological Constant as Capacity Residual (T11)}
+
+\begin{theorem}[T11, cosmological constant as global capacity residual]
+$\Lambda$ is the global capacity residual after all local enforcement
+commitments:
+\[
+\Lambda \sim (C_{\mathrm{total}} - C_{\mathrm{used}}) / V.
+\]
+\end{theorem}
+Formal verification: \coderef{check\_T11}{cosmology.py}. The time-independence
+claim $w = -1$ at all epochs is proved in \coderef{check\_L\_equation\_of\_state}{cosmology.py};
+the DESI DR2 comparison is in \coderef{check\_L\_DESI\_response}{cosmology.py}.
+
+\subsection{Why $\Lambda$ Is Small}
+Almost all correlation capacity has been discharged locally: structure
+formation, matter, radiation, horizons, records. Only the asymptotic remainder
+survives. The remaining scale is set by the largest admissible interface --- the
+cosmological horizon $R_H$ --- giving $\Lambda \sim 1/R_H^2 \sim H_0^2$. Not
+because of vacuum energy, but because $R_H$ is the last interface where
+correlation enforcement still matters.
+
+\subsection{Why $\Lambda$ Is Nonzero}
+Exact saturation ($C_{\mathrm{total}} = C_{\mathrm{used}}$) is a measure-zero
+condition. Any finite universe with finite total capacity generically has a
+small positive residual. The sign is positive because $C_{\mathrm{total}} >
+C_{\mathrm{used}}$: the universe has not yet fully committed its capacity
+budget.
+
+\subsection{Why $\Lambda$ Looks Like Accelerated Expansion}
+Local mass-energy is redistributable: it creates curvature gradients and
+attraction. Global residual capacity is non-redistributable: it creates uniform
+pressure and expansion. $\Lambda$ does not ``push space apart''; it prevents
+further correlation contraction once global slack is exhausted. Acceleration is
+the failure mode of further geometric reorganization. Tag: [P\_structural].
+
+\subsection{The APF Capacity Partition Matches Planck Across Four Parameters}\label{sec:planck-match}
+
+The capacity partition of \coderef{check\_L\_saturation\_partition}{cosmology.py}
+is not just an internal book-keeping result. Combined with
+\coderef{check\_L\_equip}{core.py} (max-entropy distribution), it predicts
+the cosmological density parameters of $\Lambda$CDM with zero free parameters:
+
+\begin{center}
+\begin{tabular}{@{}lllll@{}}
+\toprule
+Quantity & APF formula & APF value & Planck 2018 & Difference \\
+\midrule
+$\Omega_\Lambda$ & $42/61$ & $0.6885$ & $0.6848 \pm 0.007$ & $+0.54\%$ \\
+$\Omega_m$       & $19/61$ & $0.3115$ & $0.3152 \pm 0.007$ & $-1.17\%$ \\
+$\Omega_b$       & $3/61$  & $0.0492$ & $0.0493 \pm 0.0005$ & $-0.25\%$ \\
+$\Omega_{\mathrm{cdm}}$ & $16/61$ & $0.2623$ & $0.2645 \pm 0.006$ & $-0.82\%$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+All four parameters match Planck 2018 within $1.2\%$, comfortably inside
+Planck's measurement uncertainty. This is a four-parameter prediction
+from a single integer partition $61 = 42 + 3 + 16$ that is forced by
+gauge-addressability and confinement applied to the anomaly-free
+field content (Paper~4). The match is not a fit; the APF integers
+are determined entirely by the type-classification predicates and
+were not adjusted to cosmological data.
+
+\subsection{Hubble Constant Prediction and the H0DN 2026 Tension}\label{sec:H0-status}
+Combining APF's $\Omega_m = 19/61$ with Planck's measured physical matter
+density $\Omega_m h^2 = 0.143$ gives a zero-parameter Hubble-constant
+prediction:
+\[
+h_{\mathrm{APF}}^2 = \frac{\Omega_m h^2 \mid_{\mathrm{measured}}}
+                          {\Omega_m \mid_{\mathrm{APF}}}
+                  = \frac{0.143}{19/61} = 0.4591
+\quad\Longrightarrow\quad
+H_0^{\mathrm{APF}} = 67.76 \text{ km s}^{-1}\text{Mpc}^{-1}.
+\]
+This matches the Planck CMB value $67.36 \pm 0.54$ within $1\sigma$.
+
+The H0DN community-consensus measurement (Casertano et al., A\&A 708 A166,
+10 April 2026) reports $H_0 = 73.50 \pm 0.81$ km\,s$^{-1}$\,Mpc$^{-1}$
+from a covariance-weighted distance-network combination across thirteen
+indicator categories. The tension with the APF prediction is
+\[
+\frac{H_0^{\mathrm{H0DN}} - H_0^{\mathrm{APF}}}
+     {\sigma_{\mathrm{H0DN}}}
+= \frac{73.50 - 67.76}{0.81} = 7.09\sigma.
+\]
+DESI DR2 separately favors $w_0 \approx -0.75$, $w_a \approx -0.99$
+at $\sim 2\sigma$ from $w = -1$
+(\coderef{check\_L\_DESI\_response}{cosmology.py}).
+
+\subsection{Escape Routes and Their Status}\label{sec:H0-routes}
+The $H_0$ tension can in principle be resolved by one of five
+mechanisms. APF's status against each:
+
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Route & Mechanism & APF blocker & Empirical viability \\
+\midrule
+I  & Pre-recombination $r_d$ cut $\sim 7.8\%$ (EDE, extra $N_{\rm eff}$) &
+     L\_equation\_of\_state, L\_anomaly\_free &
+     EDE is mainstream candidate \\
+II & Late-time dynamical DE ($\Omega_\Lambda(a)$ growth $\sim 12\%$) &
+     L\_saturation\_partition &
+     DESI prefers wrong sign \\
+III & Local distance-ladder systematics &
+     none &
+     H0DN 2026 substantially rules out \\
+IV & Spatial curvature $\Omega_k \sim -0.05$ &
+     none &
+     Planck $|\Omega_k| < 0.02$, insufficient \\
+V & Local underdensity $\sim 25\%$ at Hubble-flow scale &
+     none &
+     Observed $\sim 5$--$15\%$, short by $\sim 2\times$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Routes I and II are blocked by [P] theorems in v6.9. Route III is
+substantially ruled out by H0DN itself. Routes IV and V are
+APF-admissible (the framework is silent on them) but neither is currently
+empirically sufficient. \emph{No route is both APF-admissible and
+empirically viable.}
+
+\subsection{Falsifier Statement}\label{sec:H0-falsifier}
+The honest disposition under the audit-response discipline:
+
+\begin{apfbox}
+\textbf{APF's cosmological-side falsifier.} APF predicts
+$H_0 = 67.76 \pm \epsilon$ km\,s$^{-1}$\,Mpc$^{-1}$ (with $\epsilon \sim
+0.5$ inheriting Planck's $\Omega_m h^2$ uncertainty), $w = -1$ exactly
+at all epochs, and the four-parameter Planck match in
+\S\ref{sec:planck-match}. \emph{If the H0DN $H_0 = 73.50 \pm 0.81$
+result stands as the true local cosmic expansion rate} --- i.e. is not
+explained by Routes III, IV, or V, all of which APF leaves to empirical
+determination --- \emph{then at least one of the following [P] theorems
+must be demoted in a future codebase version:}
+\begin{itemize}[leftmargin=1.5em,nosep]
+    \item \coderef{check\_L\_equation\_of\_state}{cosmology.py}
+    (would have to admit $w \neq -1$ in some regime),
+    \item \coderef{check\_L\_saturation\_partition}{cosmology.py}
+    (would have to admit non-topological partition evolution),
+    \item \coderef{check\_L\_anomaly\_free}{gauge.py} (would have to
+    admit late-time type decoupling).
+\end{itemize}
+This is named as Project~C.6 in Appendix~\ref{sec:open-A9}.
+Phenomenological dynamical-dark-energy proposals that contradict these
+checks without first deriving the regime conditions under which they
+fail are not adopted into the framework. Any future revision must
+discharge the demotion explicitly and prove that the new mechanism
+reproduces both the four-parameter Planck match and the H0DN
+measurement. The full mathematical analysis is in
+\emph{Reference -- H0 Tension Mathematical Analysis (2026-04-18)}.
+\end{apfbox}
+
+\section{Status Audit: Dark Matter as $C_{\mathrm{ext}}$}\label{sec:DM}
+
+The capacity partition $C_{\mathrm{total}} = C_{\mathrm{int}} + C_{\mathrm{ext}}$
+identifies a geometric sector $C_{\mathrm{ext}}$ that gravitates (it curves
+spacetime via T7B) but does not couple to gauge interactions (no internal
+structure). This sector naturally invites identification with the astrophysical
+dark-matter sector. The identification is attractive and economical, but it
+mixes three distinct layers of claim that should be visually fenced apart.
+
+\subsection*{Layer separation}
+\begin{enumerate}[leftmargin=1.6em]
+    \item \textbf{Structural result.} If the APF partition into internal and
+    external capacity sectors is accepted, then the external sector is naturally
+    associated with geometric response rather than gauge-charged internal
+    excitations. This is a structural reading of the partition itself.
+    \item \textbf{Phenomenological identification.} To identify that external
+    sector with the astrophysical dark-matter sector requires an additional
+    bridge: one must show that the effective stress-energy carried by
+    $C_{\mathrm{ext}}$ reproduces the relevant gravitational phenomenology
+    across the appropriate scales (rotation curves, lensing, structure
+    formation).
+    \item \textbf{Empirical discriminator.} The further claim that direct-detection
+    experiments should find no dark-matter particles is a downstream empirical
+    discriminator, not the same statement as the structural partition.
+\end{enumerate}
+
+\begin{statusbox}
+\textbf{Recommended status tags.}
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Claim & Recommended tag \\
+\midrule
+``There is an external geometric capacity sector $C_{\mathrm{ext}}$.'' & [P\_structural] \\
+``$C_{\mathrm{ext}}$ provides the correct dark-matter phenomenology.'' & [P\_structural + Pred] \\
+``Direct detection should find no dark-matter particles.'' & [Pred] \\
+\bottomrule
+\end{tabular}
+\end{center}
+The metric/variational results in this paper are on relatively solid ground as
+representation and closure claims, modulo clearly named imports. The dark-matter
+identification is more exposed because it crosses from internal structure to
+cosmological phenomenology. If presented at the same level as the metric or
+Euler--Lagrange results, a hostile reader will attack the whole paper through
+its most weakly fenced claim.
+\end{statusbox}
+
+\subsection*{Best presentation}
+The strongest honest presentation is: the APF capacity partition yields an
+external geometric sector that naturally invites identification with
+dark-matter-like gravitational load. This motivates a concrete phenomenological
+proposal --- that some or all observed dark-matter effects reflect the
+$C_{\mathrm{ext}}$ sector rather than a new particle species. The decisive
+status of this identification depends on confrontation with lensing,
+rotation-curve, and structure-formation data.
+
+\subsection*{Open theorem project}
+To upgrade the dark-matter claim, the missing work is not additional rhetoric
+but a formal bridge theorem: \emph{given the APF external sector
+$C_{\mathrm{ext}}$, derive the effective source term it contributes in the
+geometric response equations and prove that its admissible distributions
+reproduce at least one nontrivial dark-matter data class without introducing
+particle degrees of freedom.} Until such a theorem is in hand, the claim should
+remain visibly tagged as a structural proposal with empirical consequences,
+not as a closed theorem-level derivation.
+
+\section{Where Least-Cost Geometric Representation Fails}\label{sec:geo-fails}
+
+Geometry is valid when correlation cost is locally integrable, capacity
+gradients are smooth, and the admissible class supports a locally quadratic
+response structure. Geometry fails when one or more of these hypotheses breaks.
+
+\textbf{Singularities} destroy smooth local cost comparison by driving effective
+gradients beyond the regime of local approximation (Type IV exit).
+
+\textbf{Horizons} destroy admissible extendibility: continuation remains
+meaningful at the level of admissibility, but no longer as a single smoothly
+extendible geometric path from within the original domain (Type II / III
+depending on whether the issue is non-extendibility of admissible continuation
+or transfer to a new admissible description).
+
+\textbf{Planck-scale discreteness} destroys the tangent-space and
+local-additivity assumptions required for metric encoding (Type IV).
+
+\textbf{Topology change} alters the type of admissible class itself, so the
+original minimization problem is no longer posed on the same representational
+domain (Type IV).
+
+These are not pathologies of the underlying framework. They are predictable
+exits from geometric representation. Admissibility remains deeper than geometry;
+when geometry fails, the accounting layer survives.
+
+\section{Epistemic Tagging Discipline (Paper 6)}\label{sec:tagging}
+
+\begin{apfbox}
+\textbf{Project-wide categories.}
+\begin{itemize}[leftmargin=1.5em,nosep]
+    \item \textbf{[P] Internally derived.}
+    \item \textbf{[P]+[I] Derived with import.} APF prepares the admissible
+    class; an external mathematical theorem closes the classification.
+    \item \textbf{[P\_structural] Structural identification.}
+    \item \textbf{[Pred] Phenomenological proposal/prediction.}
+\end{itemize}
+\end{apfbox}
+
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Item & Tag & Coderef & Reason \\
+\midrule
+Regime R variational structure & [P] & \coderef{check\_Regime\_R}{plec.py} & Smooth, locally additive, connected, unsaturated (v6.9 formalization). \\
+Euler--Lagrange form & [P] & --- & Coordinate form of least-cost selection. \\
+Metric tensor (T7B) & [P\_structural] & \coderef{check\_T7B}{gravity.py} & Quadratic non-factorizing response. \\
+Lorentzian signature & [P\_structural]+[I] & \coderef{check\_L\_HKM\_causal\_geometry}{extensions.py} & APF order + HKM/Malament closure. \\
+$d = 4$ (T8) & [P\_structural] & \coderef{check\_T8}{spacetime.py} & Graviton DOF + capacity efficiency. \\
+Einstein equations & [P\_structural]+[I] & \coderef{check\_T9\_grav}{gravity.py} & A9 prereqs + Lovelock closure. \\
+$\kappa \sim 1/C_{\ast}$ & [P\_structural] & \coderef{check\_T10}{gravity.py} & Scaling-only identification. \\
+$\Lambda$ as capacity residual (T11) & [P\_structural] & \coderef{check\_T11}{cosmology.py} & Structural identification/scaling. \\
+$w = -1$ at all epochs & [P] & \coderef{check\_L\_equation\_of\_state}{cosmology.py} & Pure cosmological constant. \\
+DESI DR2 comparison & [P] & \coderef{check\_L\_DESI\_response}{cosmology.py} & Tension at 1.5--2$\sigma$; revision triggers named. \\
+Dark matter as $C_{\mathrm{ext}}$ & [P\_structural + Pred] & --- (open: \S\ref{sec:DM}) & Structural proposal + empirical claim. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Whenever a paper summary table contains both theorem-level derivations and
+interpretive identifications, the main text should not rhetorically elevate all
+entries to the same strength. Imported closure theorems should be described as
+closure of an APF-prepared admissible class, not as if APF alone proved the
+imported theorem.
+
+\section{Summary}\label{sec:summary}
+
+\subsection{The Derivation Chain}
+\begin{itemize}[leftmargin=1.5em,nosep]
+    \item Regime R supports a well-defined cost functional; PLEC selects the
+    realized path; Euler--Lagrange is its coordinate form.
+    \item Conservation laws follow from cost-functional symmetries (Noether).
+    \item Distance is minimal correlation cost; geodesics are least-cost paths.
+    \item T7B identifies the metric as a non-degenerate symmetric bilinear form
+    on tangent spaces.
+    \item A4 + HKM/Malament fix Lorentzian signature.
+    \item T8 fixes $d = 4$.
+    \item A9.1--A9.5 prepare Lovelock's conditions; Lovelock closes uniqueness
+    of the Einstein tensor in $d=4$.
+    \item T11 identifies $\Lambda$ as global capacity residual.
+    \item $C_{\mathrm{ext}}$ provides a structurally motivated dark-matter
+    candidate; the identification is fenced as proposal + prediction (\S\ref{sec:DM}).
+\end{itemize}
+
+\subsection{The Structural Conclusion}
+Dynamics and geometry are not primitive laws but least-cost representational
+compressions of admissible correlation reallocation in regimes where the
+admissible class is smooth, locally additive, and unsaturated. When those
+hypotheses hold, realized paths admit variational and geometric encoding. When
+they fail, the representational layer exits its domain while the deeper
+admissibility structure remains intact. \emph{Physical law is deeper than its
+dynamical or geometric representation.} Together with Paper~5 (quantum
+structure), this recovers the full structure of fundamental physics from finite
+enforceability --- not as postulates, but as the unique bookkeeping available
+when capacity constraints permit smooth description.
+
+\appendix
+
+\section*{Appendix A: $\Delta_{\mathrm{geo}}$ Closure Summary}
+
+The $\Delta_{\mathrm{geo}}$ gap encompassed four sub-gaps, all closed:
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Sub-gap & Resolution \\
+\midrule
+$\Delta_{\mathrm{ordering}}$ & A4 irreversibility $\Rightarrow$ strict partial order. R2/R3 formalized. \\
+$\Delta_{\mathrm{fbc}}$ & Lipschitz lemma from A1 + $\epsilon$-granularity. \\
+$\Delta_{\mathrm{continuum}}$ & Kolmogorov + chartability bridge. \\
+$\Delta_{\mathrm{signature}}$ & A4 $\to$ order + HKM + $\Omega = 1$. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Appendix B: Enforcement Cost vs. Action}
+
+Entropy measures irreversibly committed capacity (accounting of commitment).
+Enforcement cost measures capacity required for transitions (cost of
+reallocation). They are related but distinct: entropy accumulates; enforcement
+cost is path-dependent. In Regime~R, accumulated enforcement cost is encoded as
+action $K = \int L\,dt$. The identification with physical action is exact within
+the regime and breaks down at saturation. Paper~7 (ACTION) proves that this
+accumulated cost has a minimum: the structural origin of Planck's constant.
+
+\section*{Appendix C: Open Theorem Projects}
+
+The v2.0-PLEC revision identifies open theorem projects directly relevant to
+this paper.
+
+\subsection*{Project C.1: PLEC existence and uniqueness conditions}
+Define $\mathcal{A}_{\Gamma}$ precisely, formulate $E_{\Gamma}$ on it, identify
+the coercivity / lower-semicontinuity analogues that guarantee an argmin
+exists, and define the equivalence relation $\sim$ under which uniqueness is
+stated. Without this, PLEC remains a suggestive variational slogan rather than
+a usable theorem engine.
+
+\subsection*{Project C.2: Regime R as a formal check (CLOSED in v6.9)}\label{sec:open-RegimeR}
+\emph{Closed 2026-04-18.} The four R1--R4 conditions are now formalized as
+\coderef{check\_Regime\_R}{plec.py}, with an executable witness (1D harmonic
+kinetic cost on a connected admissible path class) verifying that R1--R4
+jointly imply existence of the PLEC selector. The five regime-exit types
+of \S\ref{sec:exit-taxonomy} are formalized as
+\coderef{check\_Regime\_exit\_Type\_I}{plec.py} through
+\coderef{check\_Regime\_exit\_Type\_V}{plec.py}, each with an explicit
+witness instantiating the failure mode. Paper~6 Part~I no longer rests
+on R1--R4 as prose conditions; the load-bearing hand-waving risk
+flagged in the v2.0-PLEC audit is closed.
+
+\subsection*{Project C.3: A9.1--A9.5 unified-closure check (CLOSED in v6.9)}\label{sec:open-A9}
+\emph{Closed 2026-04-18.} The unified Lovelock-prerequisite closure is
+now \coderef{check\_A9\_closure}{gravity.py}, which audits A9.1
+(locality from A1+FBC), A9.2 (covariance from T7B), A9.3 (conservation
+from A1+L\_loc), A9.4 (second-order from A4+Ostrogradsky), A9.5
+(propagation from A4+T\_graviton) as a single check rather than
+requiring readers to cross-reference three modules.
+
+\subsection*{Project C.4: Formal regime-exit theorem}
+Tie each failure mode of \S\ref{sec:dyn-fails} and \S\ref{sec:geo-fails} to a
+precise breakdown of a specific PLEC hypothesis. Formalize the Type I--V
+taxonomy as a set of checks that each classify a given regime exit by which
+hypothesis fails.
+
+\subsection*{Project C.5: Dark-matter bridge theorem}
+Derive the effective source term contributed by $C_{\mathrm{ext}}$ in the
+geometric response equations and prove that its admissible distributions
+reproduce at least one nontrivial dark-matter data class without introducing
+particle degrees of freedom (\S\ref{sec:DM}).
+
+\subsection*{Project C.6: $H_0$ tension / dark-energy confrontation}
+Address the Casertano et al. (2026) H0DN consensus measurement
+($H_0 = 73.50 \pm 0.81$, $7.1\sigma$ from early-universe $\Lambda$CDM) and the
+DESI DR2 $w_0/w_a$ tension. Two candidate directions within APF
+(\S\ref{sec:H0-status}):
+\begin{itemize}
+    \item \textbf{Direction A:} Derive what irreversibly committed capacity
+    (L\_irr) implies for late-time effective $\Omega_\Lambda(z)$, and check
+    whether the result matches DESI's preferred direction ($w_0 > -1$) or
+    contradicts it ($w_0 < -1$). Any proposed mechanism must be derived, not
+    fit; and must either be consistent with or replace
+    \coderef{check\_L\_equation\_of\_state}{cosmology.py}.
+    \item \textbf{Direction B:} Explore local-inhomogeneity /
+    scale-dependent-enforcement mechanisms that leave $w = -1$ intact but
+    address the $H_0$ measurement bias.
+\end{itemize}
+If neither direction yields a derived mechanism consistent with the data, the
+framework accepts an open falsification risk and states it as such.
+
+\section*{Appendix D: Changelog}
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+\item \textbf{v2.0-PLEC (April 2026).} Reframed entire derivation around PLEC
+schema: admissibility fixes the licensable continuation class; PLEC selects the
+realized path; failure modes recast as five formally distinct regime-exit types.
+Added shared canonical box, wayfinder box, canonical PLEC schema (definitions),
+regime-exit taxonomy section, dark-matter status fence, epistemic tagging
+discipline section, open theorem projects appendix, codebase coderef anchors
+throughout, and \S\ref{sec:H0-status} on the H0DN/DESI status. Reformatted
+bridges around HKM/Malament and Lovelock as imports closing an APF-prepared
+admissible class. Cleaned formatting throughout (v1.0 had broken section
+spacing and inline math artifacts).
+\item \textbf{v1.0 (February 2026).} Complete $\Delta_{\mathrm{geo}}$ closure (T7B,
+T8, T11, signature). Dark-matter section. Forward references.
+\end{itemize}
+
+\end{document}
