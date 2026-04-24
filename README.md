@@ -12,7 +12,7 @@
 
 ## Why this codebase exists
 
-Spacetime, gravity, cosmology, and action principle from optimal admissible reallocation. Einstein equations from Lovelock uniqueness in d=4; geodesic motion from cost-minimizing paths; cosmological-constant structure from horizon equipartition; DESI-era dynamical dark-energy commitments. Draft .tex (578 lines, v1.0) extant; PLEC propagation pending.
+Spacetime geometry, gravity, and cosmology from PLEC. PLEC path form + Euler--Lagrange + five-type regime-exit taxonomy; correlation-cost metric + geodesics; T_7B Lorentzian signature; T_8 spacetime d=4 via six-Delta chain; Einstein field equations via A9 unified closure + Lovelock; T_graviton via Weinberg--Witten; T_{11} cosmological constant as Omega_Lambda=42/61; four-parameter Planck match within 1.2%; H_0=67.76 km/s/Mpc prediction; 7.09 sigma H0DN tension formalized as explicit falsifier; T_{12}/T_{12E} dark matter as external capacity; BH thermodynamics + three-entropies unification. Version 2.0-PLEC main paper (~17pp) + Technical Supplement v1.0 (37pp, 2026-04-19 self-contained formal companion).
 
 This repository is the executable proof.
 
